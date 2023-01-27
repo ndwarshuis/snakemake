@@ -781,12 +781,12 @@ class Conda:
 
         res = json.loads(
             shell.check_output(
-                self._get_cmd("conda config --get channel_priority --json"),
+                self._get_cmd("conda config --show channel_priority --json"),
                 text=True,
                 stderr=subprocess.PIPE,
             )
         )
-        if res["get"].get("channel_priority") != "strict":
+        if res.get("channel_priority") != "strict":
             logger.warning(
                 "Your conda installation is not configured to use strict channel priorities. "
                 "This is however crucial for having robust and correct environments (for details, "
